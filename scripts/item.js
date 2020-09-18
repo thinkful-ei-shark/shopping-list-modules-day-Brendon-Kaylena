@@ -4,8 +4,8 @@ function validateName(name) {
     }
 }
 
-function create(personsName) {
-    return { id: cuid(), name: personsName, checked: false }
+function create(itemsName) {
+    return { id: cuid(), name: itemsName, checked: false }
 }
 
 export default {

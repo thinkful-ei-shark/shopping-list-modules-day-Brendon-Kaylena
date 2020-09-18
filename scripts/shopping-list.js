@@ -1,6 +1,7 @@
 import store from './store.js'
 import item from './item.js'
 
+
 const generateItemElement = function (item) {
   let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
   if (!item.checked) {
@@ -42,8 +43,19 @@ const render = function () {
   $('.js-shopping-list').html(shoppingListItemsString);
 };
 
+
 const addItemToShoppingList = function (itemName) {
-  store.items.push({ id: cuid(), name: itemName, checked: false });
+  try {
+
+    store.findById(itemName)
+
+    item.validateName(itemName);
+    let make = item.create(itemName);
+    store.items.push(make);
+  }
+  catch (error) {
+    console.log(`Cannot add item : ${error.message}`)
+  }
 };
 
 const handleNewItemSubmit = function () {
