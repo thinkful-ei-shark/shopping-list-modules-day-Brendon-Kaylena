@@ -46,15 +46,12 @@ const render = function () {
 
 const addItemToShoppingList = function (itemName) {
   try {
-
-    store.findById(itemName)
-
     item.validateName(itemName);
-    let make = item.create(itemName);
-    store.items.push(make);
-  }
-  catch (error) {
-    console.log(`Cannot add item : ${error.message}`)
+    const newItem = item.create(itemName);
+    store.items.push(newItem);
+    render();
+  } catch (error) {
+    console.log(`Cannot add item: ${error.message}`)
   }
 };
 
@@ -68,7 +65,7 @@ const handleNewItemSubmit = function () {
   });
 };
 
-const toggleCheckedForListItem = function (id) {
+/* const toggleCheckedForListItem = function (id) {
   const foundItem = store.items.find(item => item.id === id);
   foundItem.checked = !foundItem.checked;
 };
@@ -78,8 +75,8 @@ const handleItemCheckClicked = function () {
     const id = getItemIdFromElement(event.currentTarget);
     toggleCheckedForListItem(id);
     render();
-  });
-};
+  });a
+}; */
 
 const getItemIdFromElement = function (item) {
   return $(item)
@@ -142,8 +139,9 @@ const handleEditShoppingItemSubmit = function () {
 };
 
 const bindEventListeners = function () {
+  store.findAndToggleChecked();
   handleNewItemSubmit();
-  handleItemCheckClicked();
+  //handleItemCheckClicked();
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();

@@ -1,15 +1,38 @@
 import item from './item.js'
 
-const findById = function (ident) {
-
-    this.items.find((item), function () {
-        console.log(item.id === ident)
-    })
-}
 export default {
 
     items: [],
     hideCheckedItems: false,
-    findById
 
+    findById: function (id) {
+
+        this.items.find(item => item.id === id)
+
+    },
+
+    addItem: function (name) {
+        try {
+            item.validateName(name)
+            let make = item.create(name)
+            this.items.push(make)
+        }
+        catch (error) {
+
+        }
+    },
+
+    findAndToggleChecked: function (id) {
+        $('.js-shopping-list').on('click', '.js-item-toggle', event => {
+
+            let name = this.findById(id);
+            name.checked = !name.checked
+
+        }
+        )
+    },
+
+    findAndUpdate: function () {
+
+    }
 }
