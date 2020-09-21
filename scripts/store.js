@@ -32,7 +32,20 @@ export default {
         )
     },
 
-    findAndUpdate: function () {
+    findAndUpdateName: function (id, newName) {
+
+        try {
+            this.findById(id) = newName
+        }
+        catch (e) {
+            console.log(`Cannot update name: ${error.message}`)
+        }
+    },
+    findAndDelete: function (id) {
+
+        let nameIndex = this.items.findIndex((item) => item.id === id)
+        this.items.splice(nameIndex, 1)
+        // this.items.filter((item) => item.id !== id)
 
     }
 }
